@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import "./App.css";
 
 function App() {
@@ -8,6 +7,7 @@ function App() {
   const [numberallowed, setNumberallowed] = useState(true);
   const [charalloowed, setCharallowed] = useState(true);
   const [password, setPassword] = useState("");
+  const copyPassword = useRef();
 
   const passwordgenerator = useCallback(() => {
     let pass = "";
@@ -25,6 +25,11 @@ function App() {
     passwordgenerator();
   }, [length, numberallowed, charalloowed, passwordgenerator]);
 
+  const passwordCOPY = useCallback(() => {
+    copyPassword.current?.select();
+    copyPassword.current?.setSelectionRange(0, 90);
+    window.navigator.clipboard.writeText(password);
+  }, [password]);
   return (
     <>
       <div>
@@ -35,8 +40,11 @@ function App() {
             placeholder="Enter Password"
             value={password}
             readOnly
+            ref={copyPassword}
           />
-          <span>copy</span>
+          <span>
+            <button onClick={passwordCOPY}>copy</button>
+          </span>
         </div>
         <div>
           <input
