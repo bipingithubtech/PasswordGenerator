@@ -32,30 +32,35 @@ function App() {
   }, [password]);
   return (
     <>
-      <div>
-        <h2>Password generator</h2>
+      <div className="main">
+        <h2 style={{ color: "#fa4605", textTransform: "capitalize" }}>
+          Password generator
+        </h2>
         <div>
           <input
+            style={{ backgroundColor: "#fffdfc", padding: "7px 7px" }}
             type="text"
             placeholder="Enter Password"
             value={password}
             readOnly
             ref={copyPassword}
           />
-          <span>
-            <button onClick={passwordCOPY}>copy</button>
+          <span style={{ marginLeft: "5px" }}>
+            <button onClick={passwordCOPY}>Copy</button>
           </span>
         </div>
-        <div>
+        <div style={{ marginTop: "20px" }}>
           <input
+            style={{ marginRight: "10px" }}
             type="range"
             min={6}
             max={100}
             value={length}
             onChange={(e) => setLength(e.target.value)}
           />
-          <label>length:{length}</label>
+          <label style={{ color: "#ffffff" }}>length:{length}</label>
           <input
+            style={{ marginLeft: "10px" }}
             type="checkbox"
             defaultChecked={numberallowed}
             onChange={() => {
@@ -63,6 +68,7 @@ function App() {
             }}
           />
           <input
+            style={{ marginLeft: "10px" }}
             type="checkbox"
             defaultChecked={charalloowed}
             onChange={() => {
